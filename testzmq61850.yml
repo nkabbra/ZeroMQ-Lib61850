@@ -1,0 +1,69 @@
+version: "3.3"
+services:
+
+  ied_server:
+    image: 61850server
+    container_name: IED_server
+    command: "/srv/server_example_basic_io "
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.61
+    privileged: true
+
+
+  zmq_broker:
+    image: zmq-61850gateway:v1
+    container_name: IED_zmq-61850gateway
+    command: "/srv/gateway  192.168.0.61"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.62
+    privileged: true
+    
+
+  ied_zmq_sub1:
+    image: zmq61850sub:v1
+    container_name: IED_zmq61850sub1
+    volumes:
+      - ./testsub1:/app/logs
+    command: "/app/wusub  192.168.0.62"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+  ied_zmq_sub2:
+    image: zmq61850sub:v1
+    container_name: IED_zmq61850sub2
+    volumes:
+       - ./testsub2:/app/logs
+    command: "/app/wusub  192.168.0.62"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.64
+    privileged: true
+
+  ied_zmq_sub3:
+    image: zmq61850sub:v1
+    volumes:
+      - ./testsub3:/app/logs
+    container_name: IED_zmq61850sub3
+    command: "/app/wusub  192.168.0.62"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.65
+    privileged: true
+
+
+
+            
+networks:
+  macvlan1:
+    driver: macvlan
+    driver_opts:
+      parent: wlp0s20f3
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24

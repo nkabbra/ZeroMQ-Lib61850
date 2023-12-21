@@ -1,0 +1,58 @@
+version: "3.3"
+services:
+
+  ied_server:
+    image: 61850server
+    container_name: IED_server
+    command: "/srv/server_example_basic_io "
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.61
+    privileged: true
+
+  ied_zmq_sub1:
+    image: 61850server-avg
+    container_name: IED_61850sub1
+    volumes:
+      - ./testsub1:/srv/logs
+    command: "/srv/client_sub  192.168.0.61"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+  ied_zmq_sub2:
+    image: 61850server-avg
+    container_name: IED_61850sub2
+    volumes:
+      - ./testsub2:/srv/logs
+    command: "/srv/client_sub  192.168.0.61"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.64
+    privileged: true
+
+  ied_zmq_sub3:
+    image: 61850server-avg
+    container_name: IED_61850sub3
+    volumes:
+      - ./testsub3:/srv/logs
+    command: "/srv/client_sub  192.168.0.61"
+    networks:
+      macvlan1:
+        ipv4_address: 192.168.0.65
+    privileged: true
+
+
+
+            
+networks:
+  macvlan1:
+    driver: macvlan
+    driver_opts:
+      parent: wlp0s20f3
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24

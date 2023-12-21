@@ -1,0 +1,50 @@
+zmq  >5mins no containers:
+
+Minimum value: 11
+Maximum value: 21366
+Average value: 790.5667165938156
+Standard Deviation: 155.40778397804203
+
+
+61850 only mms  >5mins no containers:
+
+Minimum value: 247.0
+Maximum value: 10364.0
+Average value: 394.48524094810773
+Standard Deviation: 80.31351291637587
+
+
+zmq  >5mins with containers 1:
+Minimum value: 2340
+Maximum value: 62955
+Average value: 22597.183930001847
+Standard Deviation: 640.5903398299262
+
+
+zmq  >5mins with containers 2:
+Minimum value: 2340
+Maximum value: 63023
+Average value: 22596.999691909543
+Standard Deviation: 638.0236052376335
+
+
+
+zmq  >5mins with containers 3:
+Minimum value: 21189.0
+Maximum value: 61910.0
+Average value: 22598.716600936652
+Standard Deviation: 617.8375172609016
+
+
+61850 only mms  >5mins with  containers 1:
+Minimum value: 4316
+Maximum value: 20384
+Average value: 11403.161816137897
+Standard Deviation: 415.3575428965656
+
+
+61850 only mms  >5mins with  containers 2:
+Minimum value: 4421
+Maximum value: 17285
+Average value: 11406.193471799495
+Standard Deviation: 414.45180608503864

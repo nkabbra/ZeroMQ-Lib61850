@@ -74,21 +74,16 @@ int main (int argc, char *argv [])
         //  Process 100 updates
        
         float total_value = 0;
-        for (update_nbr = 0; update_nbr < 10 ; update_nbr++) {
 
-            char *string = s_recv (subscriber);
-            
-            float mms_value = strtof(string, NULL);      
-            total_value += mms_value;
-            free (string);
-            printf ("New temp value read %f\n", mms_value );
+        char *string = s_recv (subscriber);
+        
+        // float mms_value = strtof(string, NULL);      
+        // total_value += mms_value;
+        printf ("New temp value read %s\n", string );
+
+        free (string);
 
         
-        }
-
-        float average_value = (float)(total_value / update_nbr);
-        printf ("Average value was total %f %f\n", total_value,average_value);
-
         //  Calculate and report duration of batch
         int64_t end_time = get_timestamp();
         int64_t elapsed_time=  (int) (end_time - start_time);
@@ -96,7 +91,7 @@ int main (int argc, char *argv [])
 
 
         // Write the values to the log file in CSV format
-        fprintf(logFile, "%f,%f, %" PRId64  "\n", total_value, average_value,elapsed_time);
+        fprintf(logFile, "%f, %" PRId64  "\n", total_value,elapsed_time);
         
     }
   

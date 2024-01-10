@@ -1,9 +1,8 @@
 # Use an official debian runtime as a parent image
-FROM debian:latest
+FROM debian:stable-20211115-slim
 
 
 ENV DEBIAN_FRONTEND=noninteractive
-
 
 
 
@@ -13,19 +12,13 @@ RUN apt-get update && \
         git \
         build-essential \   
         cmake \  
-        iputils-ping \    
-        iproute2 \   
-        net-tools \
-        telnet \
-        telnetd \
-        iperf \
-        wireshark \
-        vim nano \    
+        iputils-ping \  
+        python3.11 python3.11-dev \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 
-RUN git clone -b v1.4 https://github.com/mz-automation/libiec61850.git /tmp/libiec61850
+RUN git clone -b v1.5 https://github.com/mz-automation/libiec61850.git /tmp/libiec61850
 
 RUN cd /tmp/libiec61850 && cmake . \
         && make \

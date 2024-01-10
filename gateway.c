@@ -11,6 +11,14 @@
 #include <libiec61850/iec61850_client.h>
 #include <libiec61850/hal_thread.h> /* for Thread_sleep() */
 
+#include <stdint.h>
+#include <sys/time.h>  // For gettimeofday
+
+int64_t get_timestamp() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return ((int64_t)tv.tv_sec) * 1000000 + (int64_t)tv.tv_usec;
+}
 
 // ZeroMQ Constants
 #define ZMQ_PUB_PORT "tcp://*:5556"
@@ -75,10 +83,16 @@ int main(int argc, char** argv) {
 
     while (1 && error == IED_ERROR_OK) {
         // Receive data from IEC 61850
-       
+        int64_t start_time = get_timestamp();
+
         
          /* read an analog measurement value from server */
         MmsValue* value = IedConnection_readObject(con, &error, "simpleIOGenericIO/GGIO1.AnIn1.mag.f", IEC61850_FC_MX);
+
+        //  Calculate and report duration of batch
+        int64_t end_time = get_timestamp();
+        int64_t elapsed_time=  (int) (end_time - start_time);
+        printf ("Total elapsed time: %" PRId64 " usec\n",elapsed_time);
 
         if (value != NULL)
         {
@@ -100,16 +114,10 @@ int main(int argc, char** argv) {
             
         }
 
+      
+
+
         MmsValue_delete(value);
-
-        /* read data set */
-        ClientDataSet clientDataSet = IedConnection_readDataSetValues(con, &error, "simpleIOGenericIO/LLN0.Events", NULL);
-
-        if (clientDataSet == NULL) {
-            printf("failed to read dataset\n");
-        }
-
-        ClientDataSet_destroy(clientDataSet);
 
     }
 

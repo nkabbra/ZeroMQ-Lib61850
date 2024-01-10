@@ -1,5 +1,5 @@
 # Use an official debian runtime as a parent image
-FROM debian:latest
+FROM debian:stable-20211115-slim
 
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,37 +13,27 @@ RUN apt-get update && \
         git \
         build-essential \   
         cmake \  
-        iputils-ping \    
-        iproute2 \   
-        net-tools \
-        telnet \
-        telnetd \
-        iperf \
-        wireshark \
-        vim nano \    
+        iputils-ping \  
+        python3.11 python3.11-dev \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 
-RUN git clone -b v1.4 https://github.com/mz-automation/libiec61850.git /tmp/libiec61850
+RUN git clone -b v1.5 https://github.com/mz-automation/libiec61850.git /tmp/libiec61850
 
 RUN cd /tmp/libiec61850 && cmake . \
         && make \
         && make install \
         && make examples 
 
-# Create and set the working directory
-WORKDIR /srv
-
-
 # Copy the C source code into the container
 COPY . /tmp/app
 RUN cd /tmp/app && cmake . \
     && make 
 
-RUN cd /tmp/app && cp client_sub /srv/client_sub 
-RUN cd /srv && mkdir logs
-
+# Create and set the working directory
+WORKDIR /srv
+RUN cd /tmp/app && cp gateway-gse /srv/gateway-gse
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 

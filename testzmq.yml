@@ -2,9 +2,9 @@ version: "3.3"
 services:
 
   ied_server:
-    image: 61850server:v2
-    container_name: IED_server
-    command: "/srv/server61850 "
+    image: zmq-pub-tcp:v1
+    container_name: pub
+    command: "/app/wuserver "
     tty: true
     cap_add:
       - SYS_NICE
@@ -19,33 +19,13 @@ services:
         ipv4_address: 192.168.0.61
     privileged: true
 
-
-  zmq_broker:
-    image: gateway:v1
-    container_name: IED_zmq-61850gateway
-    command: "/srv/gateway  192.168.0.61"
-    tty: true
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      rtprio: 98
-      rttime: -1
-      memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
-    mem_limit: 6g 
-    networks:
-      custom_bridge:
-        ipv4_address: 192.168.0.62
-    privileged: true
-    
-
   ied_zmq_sub1:
-    image: zmq61850sub:v1
-    container_name: IED_zmq61850sub1
+    image: zmq-sub-tcp:v1
+    container_name: sub1
+    command: "/app/wusub 192.168.0.61"
+    tty: true
     volumes:
       - ./testsub1:/app/logs
-    command: "/app/wusub  192.168.0.62"
-    tty: true
     cap_add:
       - SYS_NICE
     ulimits:
@@ -53,13 +33,12 @@ services:
       rttime: -1
       memlock: 8428281856
     cpus: 4   # Set the number of CPUs
-    mem_limit: 6g 
+    mem_limit: 6g  # Set the memory limit to 4 gigabytes
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63
     privileged: true
 
- 
 
 
             

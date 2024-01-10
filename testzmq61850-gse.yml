@@ -2,9 +2,9 @@ version: "3.3"
 services:
 
   ied_server:
-    image: 61850server:v2
-    container_name: IED_server
-    command: "/srv/server61850 "
+    image: 61850goose-pub:v1
+    container_name: IED_gse_pub
+    command: "/srv/goose_pub  "
     tty: true
     cap_add:
       - SYS_NICE
@@ -21,9 +21,9 @@ services:
 
 
   zmq_broker:
-    image: gateway:v1
+    image: gateway-gse:v1
     container_name: IED_zmq-61850gateway
-    command: "/srv/gateway  192.168.0.61"
+    command: "/srv/gateway-gse "
     tty: true
     cap_add:
       - SYS_NICE
@@ -37,14 +37,18 @@ services:
       custom_bridge:
         ipv4_address: 192.168.0.62
     privileged: true
-    
+  
+ 
 
-  ied_zmq_sub1:
-    image: zmq61850sub:v1
-    container_name: IED_zmq61850sub1
+
+
+
+  zmq_sub:
+    image: zmq61850sub:v2
+    container_name: IED_zmq-61850sub
+    command: "/app/wusub 192.168.0.62"
     volumes:
       - ./testsub1:/app/logs
-    command: "/app/wusub  192.168.0.62"
     tty: true
     cap_add:
       - SYS_NICE
@@ -58,14 +62,24 @@ services:
       custom_bridge:
         ipv4_address: 192.168.0.63
     privileged: true
+  
+# networks:
+#   custom_bridge:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24
 
- 
 
 
             
 networks:
   custom_bridge:
-    driver: bridge
+    driver: ipvlan
+    driver_opts:
+      parent: wlp0s20f3   
     ipam:
       driver: default
       config:

@@ -5,8 +5,8 @@ def calculate_statistics(csv_file_path):
         # Read the CSV file into a pandas DataFrame
         df = pd.read_csv(csv_file_path)
 
-        # Extract the third column
-        third_column = df.iloc[:, 2]  # Assumes 0-based indexing
+        # Extract the second column
+        third_column = df.iloc[:,1]  # Assumes 0-based indexing
 
         # Calculate statistics
         minimum_value = third_column.min()

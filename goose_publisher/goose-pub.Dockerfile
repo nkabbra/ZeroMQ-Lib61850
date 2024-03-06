@@ -33,7 +33,7 @@ RUN cd /tmp/app && cmake . \
 
 # Create and set the working directory
 WORKDIR /srv
-RUN cd /tmp/app && cp goose_publisher_example /srv/gateway-gse
+RUN cd /tmp/app && cp goose_publisher_example /srv/pub-gse
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 

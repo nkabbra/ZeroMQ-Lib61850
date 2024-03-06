@@ -12,6 +12,16 @@
 #include <libiec61850/mms_value.h>
 #include <libiec61850/goose_publisher.h>
 
+#include <sys/time.h>  // For gettimeofday
+#include <inttypes.h>
+
+
+
+int64_t get_timestamp() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return ((int64_t)tv.tv_sec) * 1000000 + (int64_t)tv.tv_usec;
+}
 
 /* has to be executed as root! */
 int
@@ -51,19 +61,24 @@ main(int argc, char **argv)
      * stack_config.h is used.
      */
     GoosePublisher publisher = GoosePublisher_create(&gooseCommParameters, interface);
-
+    
     if (publisher) {
         GoosePublisher_setGoCbRef(publisher, "simpleIOGenericIO/LLN0$GO$gcbAnalogValues");
         GoosePublisher_setConfRev(publisher, 1);
         GoosePublisher_setDataSetRef(publisher, "simpleIOGenericIO/LLN0$AnalogValues");
         GoosePublisher_setTimeAllowedToLive(publisher, 500);
+        
 
         int i = 0;
+        int SqNum=0;
 
         while(true){
             Thread_sleep(1);
+            SqNum=SqNum+1;
+            int64_t elapsed_time1 = get_timestamp();
 
-        
+            GoosePublisher_setSqNum(publisher,SqNum);
+            printf("  Sent new update SqNum: %d t: %"PRIi64" usec\n",  SqNum,elapsed_time1 );
             GoosePublisher_publish(publisher, dataSetValues);
            
         }

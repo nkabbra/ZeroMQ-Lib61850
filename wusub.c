@@ -60,12 +60,7 @@ int main (int argc, char *argv [])
     int update_nbr;
 
 
-    // Open a file in write mode
-    FILE *logFile = fopen("./logs/log.csv", "w");
-    if (logFile == NULL) {
-        perror("Error opening log file");
-        return 1;
-    }
+    freopen("logs/log.csv", "w",stdout);
 
     while(true){
 
@@ -90,14 +85,10 @@ int main (int argc, char *argv [])
         printf ("Total elapsed time: %" PRId64 " usec\n",elapsed_time);
 
 
-        // Write the values to the log file in CSV format
-        fprintf(logFile, "%f, %" PRId64  "\n", total_value,elapsed_time);
         
     }
   
 
-    // Close the log file
-    fclose(logFile);
     
 
     zmq_close (subscriber);

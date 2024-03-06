@@ -91,6 +91,7 @@ int main(int argc, char** argv) {
 
     GooseReceiver receiver = GooseReceiver_create();
 
+    freopen("logs/log.csv", "w",stdout);
 
     if (argc > 1)
         {  printf("Set interface id: %s\n", argv[1]);

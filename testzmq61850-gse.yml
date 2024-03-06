@@ -2,18 +2,20 @@ version: "3.3"
 services:
 
   ied_server:
-    image: 61850goose-pub:v1
+    image: goose-pub
     container_name: IED_gse_pub
-    command: "/srv/goose_pub  "
-    tty: true
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      rtprio: 98
-      rttime: -1
-      memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
-    mem_limit: 6g 
+    command: "/srv/pub-gse  "
+    volumes:
+      - ./testpub1:/srv/logs
+    #tty: true
+    # cap_add:
+    #   - SYS_NICE
+    # ulimits:
+    #   rtprio: 98
+    #   rttime: -1
+    #   memlock: 8428281856
+    # cpus: 4   # Set the number of CPUs
+    # mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.61
@@ -21,18 +23,20 @@ services:
 
 
   zmq_broker:
-    image: gateway-gse:v1
+    image: gateway-gse
     container_name: IED_zmq-61850gateway
     command: "/srv/gateway-gse "
-    tty: true
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      rtprio: 98
-      rttime: -1
-      memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
-    mem_limit: 6g 
+    volumes:
+      - ./testgate1:/srv/logs
+    #tty: true
+    # cap_add:
+    #   - SYS_NICE
+    # ulimits:
+    #   rtprio: 98
+    #   rttime: -1
+    #   memlock: 8428281856
+    # cpus: 4   # Set the number of CPUs
+    # mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.62
@@ -44,44 +48,44 @@ services:
 
 
   zmq_sub:
-    image: zmq61850sub:v2
-    container_name: IED_zmq-61850sub
+    image: zmq-sub-tcp:v1
+    container_name: sub1
     command: "/app/wusub 192.168.0.62"
     volumes:
       - ./testsub1:/app/logs
-    tty: true
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      rtprio: 98
-      rttime: -1
-      memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
-    mem_limit: 6g 
+    # tty: true
+    # cap_add:
+    #   - SYS_NICE
+    # ulimits:
+    #   rtprio: 98
+    #   rttime: -1
+    #   memlock: 8428281856
+    # cpus: 4   # Set the number of CPUs
+    # mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63
     privileged: true
   
-# networks:
-#   custom_bridge:
-#     driver: bridge
-#     ipam:
-#       driver: default
-#       config:
-#           -
-#             subnet: 192.168.0.0/24
-
-
-
-            
 networks:
   custom_bridge:
-    driver: ipvlan
-    driver_opts:
-      parent: wlp0s20f3   
+    driver: bridge
     ipam:
       driver: default
       config:
           -
             subnet: 192.168.0.0/24
+
+
+
+            
+# networks:
+#   custom_bridge:
+#     driver: ipvlan
+#     driver_opts:
+#       parent: wlp0s20f3   
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24

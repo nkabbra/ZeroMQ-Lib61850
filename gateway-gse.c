@@ -39,9 +39,8 @@ gooseListener(GooseSubscriber subscriber, void* zmq_publisher)
     printf("  elapsed time-g: %"PRIi64" usec\n",elapsed_time1);
     MmsValue* ds_values = GooseSubscriber_getDataSetValues(subscriber);
 
-    char buffer[1024];
-
-    MmsValue_printToBuffer(ds_values, buffer, 1024);
+    char buffer[20];
+    sprintf (buffer, "SqNum: %d", GooseSubscriber_getSqNum(subscriber));
 
 
     s_send (zmq_publisher, buffer);

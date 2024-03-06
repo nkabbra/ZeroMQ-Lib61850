@@ -23,4 +23,6 @@ Pay attention to Dockerfile: the version with no delay works with
         iputils-ping \  
         python3.11 python3.11-dev \'
 
-- 'https://github.com/booksbyus/zguide'
+- 'git clone https://github.com/booksbyus/zguide'
+- 'gcc -o wuserver wuserver.c -lczmq -lzmq'
+- 

@@ -80,6 +80,7 @@ int main(int argc, char** argv) {
     printf("Connecting to %s:%i\n", hostname, tcpPort);
     printf("Connected\n");
 
+    freopen("logs/log.csv", "w",stdout);
 
     while (1 && error == IED_ERROR_OK) {
         // Receive data from IEC 61850

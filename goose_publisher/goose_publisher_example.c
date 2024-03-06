@@ -42,6 +42,8 @@ main(int argc, char **argv)
     LinkedList_add(dataSetValues, MmsValue_newBinaryTime(false));
     LinkedList_add(dataSetValues, MmsValue_newIntegerFromInt32(5678));
 
+    freopen("logs/log.csv", "w",stdout);
+
     CommParameters gooseCommParameters;
 
     gooseCommParameters.appId = 1000;

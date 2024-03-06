@@ -34,29 +34,18 @@ int64_t get_timestamp() {
 static void
 gooseListener(GooseSubscriber subscriber, void* zmq_publisher)
 {
-    printf("GOOSE event:\n");
+   
     int64_t elapsed_time1 = get_timestamp();
     printf("  elapsed time-g: %"PRIi64" usec\n",elapsed_time1);
-
-
-    printf("  stNum: %u sqNum: %u\n", GooseSubscriber_getStNum(subscriber),
-            GooseSubscriber_getSqNum(subscriber));
-    printf("  timeToLive: %u\n", GooseSubscriber_getTimeAllowedToLive(subscriber));
-
-    uint64_t timestamp = GooseSubscriber_getTimestamp(subscriber);
-    printf("  timestamp: %u.%u\n", (uint32_t) (timestamp / 1000), (uint32_t) (timestamp % 1000));
-    printf("  message is %s\n", GooseSubscriber_isValid(subscriber) ? "valid" : "INVALID");
-
     MmsValue* ds_values = GooseSubscriber_getDataSetValues(subscriber);
 
     char buffer[1024];
 
     MmsValue_printToBuffer(ds_values, buffer, 1024);
 
-    printf("  allData: %s\n", buffer);
 
     s_send (zmq_publisher, buffer);
-    printf("  Sent new update from zmq  \n" );
+    printf("  Sent new update from zmq SqNum: %d t: %"PRIi64" usec\n",   GooseSubscriber_getSqNum(subscriber),elapsed_time1 );
 
 }
 
@@ -147,8 +136,8 @@ int main(int argc, char** argv) {
  
 
 
-    // cleanup(zmq_context);
-    // zmq_close (zmq_publisher);
+    cleanup(zmq_context);
+    zmq_close (zmq_publisher);
     GooseReceiver_stop(receiver);
     GooseReceiver_destroy(receiver);
  

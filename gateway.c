@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
     printf("Connected\n");
 
     freopen("logs/log.csv", "w",stdout);
-
+    int SqNum=0;
     while (1 && error == IED_ERROR_OK) {
         // Receive data from IEC 61850
         int64_t start_time = get_timestamp();
@@ -94,18 +94,16 @@ int main(int argc, char** argv) {
         int64_t end_time = get_timestamp();
         int64_t elapsed_time=  (int) (end_time - start_time);
         printf ("Total elapsed time: %" PRId64 " usec\n",elapsed_time);
-
+        SqNum =SqNum+1;
         if (value != NULL)
         {
             if (MmsValue_getType(value) == MMS_FLOAT) {
                 float fval = MmsValue_toFloat(value);
-                printf("read iec61850 mms float value: %f\n", fval);
-
                   //  Send message to all subscribers
                 char update [20];
-                sprintf (update, "%f",fval);
+                sprintf (update, "%f %d",fval, SqNum);
                 s_send (zmq_publisher, update);
-                printf("Sent new update from zmq %s \n",update );
+                printf("Sent new update SqNum: %d t: %" PRId64 " usec\n",SqNum,end_time );
 
             }
             else if (MmsValue_getType(value) == MMS_DATA_ACCESS_ERROR) {

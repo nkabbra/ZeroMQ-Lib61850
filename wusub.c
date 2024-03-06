@@ -71,19 +71,14 @@ int main (int argc, char *argv [])
         float total_value = 0;
 
         char *string = s_recv (subscriber);
-        
-        // float mms_value = strtof(string, NULL);      
-        // total_value += mms_value;
-        printf ("New temp value read %s\n", string );
-
-        free (string);
 
         
         //  Calculate and report duration of batch
         int64_t end_time = get_timestamp();
         int64_t elapsed_time=  (int) (end_time - start_time);
+        printf ("Received update with %s t: %" PRId64 " usec\n",string,end_time);
         printf ("Total elapsed time: %" PRId64 " usec\n",elapsed_time);
-
+        free (string);
 
         
     }

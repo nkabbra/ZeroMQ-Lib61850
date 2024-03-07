@@ -23,7 +23,7 @@ services:
 
 
   zmq_broker:
-    image: gateway-gse
+    image: gateway-gse:v1
     container_name: IED_zmq-61850gateway
     command: "/srv/gateway-gse "
     volumes:

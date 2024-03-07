@@ -75,7 +75,7 @@ main(int argc, char **argv)
         int SqNum=0;
 
         while(true){
-            Thread_sleep(1);
+            Thread_sleep(0.01);
             SqNum=SqNum+1;
             int64_t elapsed_time1 = get_timestamp();
 

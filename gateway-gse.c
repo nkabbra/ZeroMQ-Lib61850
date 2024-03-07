@@ -36,7 +36,7 @@ gooseListener(GooseSubscriber subscriber, void* zmq_publisher)
 {
    
     int64_t elapsed_time1 = get_timestamp();
-    printf("  elapsed time-g: %"PRIi64" usec\n",elapsed_time1);
+    //printf("  elapsed time-g: %"PRIi64" usec\n",elapsed_time1);
     MmsValue* ds_values = GooseSubscriber_getDataSetValues(subscriber);
 
     char buffer[20];

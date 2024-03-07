@@ -7,15 +7,15 @@ services:
     command: "/srv/pub-gse  "
     volumes:
       - ./testpub1:/srv/logs
-    #tty: true
-    # cap_add:
-    #   - SYS_NICE
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpus: 4   # Set the number of CPUs
-    # mem_limit: 6g 
+    tty: true
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpus: 4   # Set the number of CPUs
+    mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.61
@@ -28,15 +28,15 @@ services:
     command: "/srv/gateway-gse "
     volumes:
       - ./testgate1:/srv/logs
-    #tty: true
-    # cap_add:
-    #   - SYS_NICE
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpus: 4   # Set the number of CPUs
-    # mem_limit: 6g 
+    tty: true
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpus: 4   # Set the number of CPUs
+    mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.62
@@ -53,15 +53,15 @@ services:
     command: "/app/wusub 192.168.0.62"
     volumes:
       - ./testsub1:/app/logs
-    # tty: true
-    # cap_add:
-    #   - SYS_NICE
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpus: 4   # Set the number of CPUs
-    # mem_limit: 6g 
+    tty: true
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpus: 4   # Set the number of CPUs
+    mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63

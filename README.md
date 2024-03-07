@@ -25,4 +25,7 @@ Pay attention to Dockerfile: the version with no delay works with
 
 - 'git clone https://github.com/booksbyus/zguide'
 - 'gcc -o wuserver wuserver.c -lczmq -lzmq'
-- 
+- 'git config --global credential.helper store'
+- '$ sudo mkdir /media/external'
+- '$ sudo mount -t ntfs-3g /dev/sdb1 /media/external'
+- '$ sudo umount /dev/sdb1'

@@ -10,6 +10,10 @@ services:
     cap_add:
       - SYS_NICE
       - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
     cpuset: "3"
     networks:
       custom_bridge:
@@ -25,6 +29,10 @@ services:
     cap_add:
       - SYS_NICE
       - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
     cpuset: "4"
     networks:
       custom_bridge:

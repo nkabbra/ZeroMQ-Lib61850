@@ -7,15 +7,10 @@ services:
     command: "/app/wuserver "
     volumes:
       - ./testpub1:/app/logs
-    # tty: true
-    # cap_add:
-    #   - SYS_NICE
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpus: 4   # Set the number of CPUs
-    # mem_limit: 6g 
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    cpuset: "3"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.61
@@ -27,25 +22,15 @@ services:
     volumes:
       - ./testsub1:/app/logs
     command: "/app/wusub 192.168.0.61"
-    # tty: true
-    # volumes:
-    #   - ./testsub1:/app/logs
-    # cap_add:
-    #   - SYS_NICE
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpus: 4   # Set the number of CPUs
-    # mem_limit: 6g  # Set the memory limit to 4 gigabytes
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    cpuset: "4"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63
     privileged: true
 
-
-
-            
 networks:
   custom_bridge:
     driver: bridge

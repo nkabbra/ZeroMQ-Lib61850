@@ -54,7 +54,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.64
     privileged: true
 
   ied_zmq_sub3:
@@ -72,7 +72,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.65
     privileged: true
 
   ied_zmq_sub4:
@@ -90,7 +90,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.66
     privileged: true
 
   ied_zmq_sub5:
@@ -108,7 +108,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.67
     privileged: true 
 
 
@@ -127,7 +127,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.68
     privileged: true
 
 
@@ -146,7 +146,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.69
     privileged: true
 
 
@@ -166,7 +166,7 @@ services:
       memlock: 8428281856
     networks:
       custom_bridge:
-        ipv4_address: 192.168.0.63
+        ipv4_address: 192.168.0.70
     privileged: true
 
 networks:

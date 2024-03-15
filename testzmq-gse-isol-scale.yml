@@ -1,0 +1,222 @@
+version: "3.3"
+services:
+
+  ied_server:
+    image: goose-pub
+    container_name: IED_gse_pub
+    command: "/srv/pub-gse  "
+    volumes:
+      - ./testpub1:/srv/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpuset: "3"  # Set to run on CPU 3
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.61
+    privileged: true
+
+
+  zmq_broker:
+    image: gateway-gse:v1
+    container_name: IED_zmq-61850gateway
+    command: "/srv/gateway-gse "
+    volumes:
+      - ./testgate1:/srv/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpuset: "4"  # Set to run on CPU 4
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.62
+    privileged: true
+  
+  zmq_sub:
+    image: zmq-sub-tcp:v1
+    container_name: sub1
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub1:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+  
+
+  zmq_sub2:
+    image: zmq-sub-tcp:v1
+    container_name: sub2
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub2:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+  zmq_sub3:
+    image: zmq-sub-tcp:v1
+    container_name: sub3
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub3:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+  zmq_sub4:
+    image: zmq-sub-tcp:v1
+    container_name: sub4
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub4:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+
+  zmq_sub5:
+    image: zmq-sub-tcp:v1
+    container_name: sub5
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub5:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+  zmq_sub6:
+    image: zmq-sub-tcp:v1
+    container_name: sub6
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub6:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+
+  zmq_sub7:
+    image: zmq-sub-tcp:v1
+    container_name: sub7
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub7:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+  zmq_sub8:
+    image: zmq-sub-tcp:v1
+    container_name: sub8
+    command: "/app/wusub 192.168.0.62"
+    volumes:
+      - ./testsub8:/app/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+      - IPC_LOCK
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+networks:
+  custom_bridge:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24

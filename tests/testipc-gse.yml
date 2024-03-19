@@ -1,0 +1,91 @@
+version: "3.3"
+services:
+
+  ied_server:
+    image: goose-pub
+    container_name: IED_gse_pub
+    command: "/srv/pub-gse  "
+    volumes:
+      - ./testpub1:/srv/logs
+    tty: true
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 98
+      rttime: -1
+      memlock: 8428281856
+    cpus: 4   # Set the number of CPUs
+    mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.61
+    privileged: true
+
+  zmq_broker:
+    image: gateway-ipc-gse
+    container_name: IED_zmq-61850gateway
+    command: "/srv/gateway-ipc-gse "
+    volumes:
+      - ./testgate1:/srv/logs
+      - ipc-shared-volume:/tmp
+    # tty: true
+    # cap_add:
+    #   - SYS_NICE
+    # ulimits:
+    #   rtprio: 98
+    #   rttime: -1
+    #   memlock: 8428281856
+    # cpus: 4   # Set the number of CPUs
+    # mem_limit: 6g 
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.62
+    privileged: true
+  
+
+
+  ied_zmq_sub1:
+    image: sub-ipc2
+    container_name: sub1
+    volumes:
+      - ./testsub1:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    # cap_add:
+    #   - SYS_NICE
+    #   - IPC_LOCK
+    # ulimits:
+    #   rtprio: 98
+    #   rttime: -1
+    #   memlock: 8428281856
+    # cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+volumes:
+  ipc-shared-volume:
+    driver: local
+
+    
+networks:
+  custom_bridge:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24
+
+            
+# networks:
+#   custom_bridge:
+#     driver: macvlan
+#     driver_opts:
+#       parent: wlp0s20f3   
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24

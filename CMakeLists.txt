@@ -39,6 +39,21 @@ add_executable(gateway-gse
 
 
 
+set(gateway-ipc-gse_SRCS
+   gateway-ipc-gse.c
+)
+
+IF(MSVC)
+set_source_files_properties(${gateway-ipc-gse_SRCS}
+                                       PROPERTIES LANGUAGE CXX)
+ENDIF(MSVC)
+
+# Set the include directories of header files
+include_directories(/usr/local/include/libiec61850)
+
+add_executable(gateway-ipc-gse
+  ${gateway-ipc-gse_SRCS}
+)
 
 
 
@@ -68,6 +83,19 @@ target_link_libraries(gateway
 
 
 target_link_libraries(gateway-gse
+    libiec61850.so
+    libiec61850.a
+    libhal.a
+    libhal-shared.a
+    pthread
+    m
+    czmq
+    zmq
+)
+
+
+
+target_link_libraries(gateway-ipc-gse
     libiec61850.so
     libiec61850.a
     libhal.a

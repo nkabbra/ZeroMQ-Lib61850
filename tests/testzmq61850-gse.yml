@@ -81,7 +81,7 @@ networks:
             
 # networks:
 #   custom_bridge:
-#     driver: ipvlan
+#     driver: macvlan
 #     driver_opts:
 #       parent: wlp0s20f3   
 #     ipam:

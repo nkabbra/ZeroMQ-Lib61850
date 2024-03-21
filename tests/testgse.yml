@@ -14,7 +14,7 @@ services:
         rtprio: 98
         rttime: -1
         memlock: 8428281856
-    cpuset: "2-3"
+    cpuset: "3"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.61
@@ -33,7 +33,7 @@ services:
         rtprio: 98
         rttime: -1
         memlock: 8428281856
-    cpuset: "4-5"
+    cpuset: "4"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63

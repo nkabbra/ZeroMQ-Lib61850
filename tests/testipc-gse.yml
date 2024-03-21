@@ -35,7 +35,7 @@ services:
       rtprio: 98
       rttime: -1
       memlock: 8428281856
-    cpuset: "3-4"  # Set the number of CPUs
+    cpuset: "4"  # Set the number of CPUs
     mem_limit: 6g 
     networks:
       custom_bridge:
@@ -58,7 +58,7 @@ services:
       rtprio: 98
       rttime: -1
       memlock: 8428281856
-    cpuset: "4-5"
+    cpuset: "5"
     mem_limit: 6g
     networks:
       custom_bridge:

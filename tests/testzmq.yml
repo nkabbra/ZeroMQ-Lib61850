@@ -39,23 +39,23 @@ services:
         ipv4_address: 192.168.0.63
     privileged: true
 
-networks:
-  custom_bridge:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-          -
-            subnet: 192.168.0.0/24
-
-            
 # networks:
 #   custom_bridge:
-#     driver: macvlan
-#     driver_opts:
-#       parent: wlp0s20f3   
+#     driver: bridge
 #     ipam:
 #       driver: default
 #       config:
 #           -
 #             subnet: 192.168.0.0/24
+
+            
+networks:
+  custom_bridge:
+    driver: macvlan
+    driver_opts:
+      parent: enp8s0   
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24

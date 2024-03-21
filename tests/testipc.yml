@@ -8,14 +8,14 @@ services:
       - ./testpub1:/app/logs
       - ipc-shared-volume:/tmp
     command: "/app/wuserver "
-    # cap_add:
-    #   - SYS_NICE
-    #   - IPC_LOCK
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpuset: "4"
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63
@@ -24,20 +24,20 @@ services:
 
 
   ied_zmq_sub1:
-    image: sub-ipc2
+    image: sub-ipc
     container_name: sub1
     volumes:
       - ./testsub1:/app/logs
       - ipc-shared-volume:/tmp
     command: "/app/wusub "
-    # cap_add:
-    #   - SYS_NICE
-    #   - IPC_LOCK
-    # ulimits:
-    #   rtprio: 98
-    #   rttime: -1
-    #   memlock: 8428281856
-    # cpuset: "4"
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.64

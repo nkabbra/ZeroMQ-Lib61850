@@ -33,15 +33,32 @@ def plot_normalized_histogram(values,l):
     
 
 # Example usage:
-csv_file = 'delay.csv'
+csv_file = '/home/nadine_k/Documents/ZMQ/results/results-20-march/testzmq-gse-ipc/delay.csv'
 x1_values, y1_values = read_values_from_csv(csv_file)
-# Example usage:
-#csv_file = 'results/testsub-d5/delay.csv'
-#x2_values, y2_values = read_values_from_csv(csv_file)
-# Example usage:
-#csv_file = 'results/testgate-d5/delay.csv'
-#x5_values, y5_values = read_values_from_csv(csv_file)
 
+# # Example usage:
+# csv_file = 'delay2.csv'
+# x2_values, y2_values = read_values_from_csv(csv_file)
+
+# # Example usage:
+# csv_file = 'delay3.csv'
+# x3_values, y3_values = read_values_from_csv(csv_file)
+
+# # Example usage:
+# csv_file = 'delay4.csv'
+# x4_values, y4_values = read_values_from_csv(csv_file)
+
+# # Example usage:
+# csv_file = 'delay5.csv'
+# x5_values, y5_values = read_values_from_csv(csv_file)
+
+# # Example usage:
+# csv_file = 'delay6.csv'
+# x6_values, y6_values = read_values_from_csv(csv_file)
+
+# # Example usage:
+# csv_file = 'delay7.csv'
+#x7_values, y7_values = read_values_from_csv(csv_file)
 
 
 plt.figure()
@@ -53,7 +70,19 @@ plot_normalized_histogram(y1_values,'d0')
 
 
 plt.figure()
-plt.plot(x1_values, y1_values,label='d0')
+plt.plot(x1_values, y1_values,label='d1')
+# plt.plot(x2_values, y2_values,label='d2')
+
+# plt.plot(x3_values, y3_values,label='d3')
+
+# plt.plot(x4_values, y4_values,label='d4')
+
+# plt.plot(x5_values, y5_values,label='d5')
+
+# plt.plot(x6_values, y6_values,label='d6')
+#plt.plot(x7_values, y7_values,label='d7')
+
+
 #plt.plot(x2_values[20000:100000], y2_values[20000:100000],label='d5-sub')
 #plt.plot(x5_values[20000:100000], y5_values[20000:100000],label='d5-gate')
 

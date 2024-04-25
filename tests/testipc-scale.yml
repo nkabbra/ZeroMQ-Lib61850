@@ -1,0 +1,68 @@
+version: "3.3"
+services:
+
+  ied_zmq_pub1:
+    image: pub-ipc
+    container_name: pub1
+    volumes:
+      - ./testpub1:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wuserver "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+
+  ied_zmq_sub1:
+    image: sub-ipc
+    container_name: sub1
+    volumes:
+      - ./testsub1:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.64
+    privileged: true
+
+volumes:
+  ipc-shared-volume:
+    driver: local
+networks:
+  custom_bridge:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24
+
+            
+# networks:
+#   custom_bridge:
+#     driver: macvlan
+#     driver_opts:
+#       parent: wlp0s20f3   
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24

@@ -24,7 +24,7 @@ def calculate_statistics(csv_file_path):
         return None
 
 # Example usage:
-csv_file_path = 'delay1.csv'
+csv_file_path = 'non_outliers15.csv'
 #csv_file_path = 'results/testzmq-gse-sub-d5/outliers.csv'
 
 statistics = calculate_statistics(csv_file_path)

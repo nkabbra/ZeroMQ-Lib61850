@@ -60,7 +60,7 @@ int main (int argc, char *argv [])
     int update_nbr;
 
 
-    freopen("logs/log.csv", "w",stdout);
+    // freopen("logs/log.csv", "w",stdout);
 
     while(true){
 
@@ -83,9 +83,6 @@ int main (int argc, char *argv [])
         
     }
   
-
-    
-
     zmq_close (subscriber);
     zmq_ctx_destroy (context);
     return 0;

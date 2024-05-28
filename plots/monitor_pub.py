@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 
 # Load the CSV file into a pandas DataFrame
-file_path='/home/nadine_k/Documents/ZMQ/results/results-15-april/testzmq-scale2/resources-pub.csv'
+file_path='/home/nadine_k/Documents/ZMQ/results/results-25-april/testzmq-gse-ipc-scale/resources-pub.csv'
 timestamps=[]
 cpu_values= []
 memory_values=[]
@@ -36,9 +36,9 @@ with open(file_path, 'r') as file:
         if "GB" in network_value:  # Check if the value is in GB
             network_value = float(network_value[:-2]) * 1000  # Multiply by 1000
         else:
-            network_value = float(network_value[:-2])  
+            # network_value = float(network_value[:-2])  
             # Remove the last 2 characters (MB / B) and convert to float
-            #network_value=0
+            network_value=0
         network_values.append(network_value)
       
 # Plotting
@@ -76,7 +76,7 @@ axes[2].set_xticks(timestamps[::10])  # Set x-axis ticks to every 10th time valu
 axes[-1].set_xlabel('Time')
 
 # Figure title
-plt.suptitle('TestZMQ-scale2 Publisher Resources', fontsize=16)
+plt.suptitle('TestZMQ-gse-ipc-scale Publisher Resources', fontsize=16)
 
 # Adjust layout
 plt.tight_layout()

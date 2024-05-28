@@ -25,9 +25,9 @@ def count_elements(csv_file):
     return count
 
 # Example usage:
-input_file = 'delay15.csv'
-output_file = 'outliers15.csv'
-non_outliers_file = 'non_outliers15.csv'
+input_file = 'delay.csv'
+output_file = 'outliers.csv'
+non_outliers_file = 'non_outliers.csv'
 limit = 3300  # Set your desired limit here
 
 filter_and_save(input_file, output_file, non_outliers_file, limit)

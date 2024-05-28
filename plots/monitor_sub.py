@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 
 # Load the CSV file into a pandas DataFrame
-file_path='/home/nadine_k/Documents/ZMQ/results/results-15-april/testzmq-scale2/resources-sub1.csv'
+file_path='/home/nadine_k/Documents/ZMQ/results/results-25-april/testzmq-gse-ipc-scale/resources-sub1.csv'
 timestamps=[]
 cpu_values= []
 memory_values=[]
@@ -74,7 +74,7 @@ axes[2].set_xticks(timestamps[::10])  # Set x-axis ticks to every 10th time valu
 axes[-1].set_xlabel('Time')
 
 # Figure title
-plt.suptitle('TestZMQ-scale2 Subscriber Resources', fontsize=16)
+plt.suptitle('TestZMQ-gse-ipc-scale Subscriber Resources', fontsize=16)
 
 # Adjust layout
 plt.tight_layout()

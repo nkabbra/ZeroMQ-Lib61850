@@ -32,11 +32,11 @@ def subtract_t_values(parameters1, parameters2, output_csv_file):
         writer.writerows(subtracted_values)
 
 # Example usage:
-pub = '/home/nadine_k/Documents/ZMQ/results/results-15-april/testzmq-scale2/testpub1/log.csv'
-sub = '/home/nadine_k/Documents/ZMQ/results/results-15-april/testzmq-scale2/testsub15/log.csv'
+pub = '/home/nadine_k/Documents/ZMQ/results/results-2-may/testgse-p4/testpub1/log.csv'
+sub = '/home/nadine_k/Documents/ZMQ/results/results-2-may/testgse-p4/testsub1/log.csv'
 gate = 'results/testzmq-gse-sub-d1-new/testgate1/log.csv'
 
-output_csv_file='delay15.csv'
+output_csv_file='delay.csv'
 
 parameters_sub = extract_parameters_from_csv(sub,0)
 

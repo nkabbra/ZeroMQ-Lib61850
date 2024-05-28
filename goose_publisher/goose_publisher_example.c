@@ -68,8 +68,7 @@ main(int argc, char **argv)
         GoosePublisher_setGoCbRef(publisher, "simpleIOGenericIO/LLN0$GO$gcbAnalogValues");
         GoosePublisher_setConfRev(publisher, 1);
         GoosePublisher_setDataSetRef(publisher, "simpleIOGenericIO/LLN0$AnalogValues");
-        GoosePublisher_setTimeAllowedToLive(publisher, 500);
-        
+        GoosePublisher_setTimeAllowedToLive(publisher, 500);        
 
         int i = 0;
         int SqNum=0;

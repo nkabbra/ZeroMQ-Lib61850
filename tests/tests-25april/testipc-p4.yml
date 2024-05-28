@@ -22,6 +22,73 @@ services:
     privileged: true
 
 
+  ied_zmq_pub2:
+    image: pub-ipc
+    container_name: pub2
+    volumes:
+      - ./testpub2:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wuserver "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.70
+    privileged: true
+
+
+
+  ied_zmq_pub3:
+    image: pub-ipc
+    container_name: pub3
+    volumes:
+      - ./testpub3:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wuserver "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.71
+    privileged: true
+
+
+
+  ied_zmq_pub4:
+    image: pub-ipc
+    container_name: pub4
+    volumes:
+      - ./testpub4:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wuserver "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.72
+    privileged: true
+
+
+
+
 
   ied_zmq_sub1:
     image: sub-ipc
@@ -43,9 +110,14 @@ services:
         ipv4_address: 192.168.0.64
     privileged: true
 
+
+
+
 volumes:
   ipc-shared-volume:
     driver: local
+
+
 networks:
   custom_bridge:
     driver: bridge

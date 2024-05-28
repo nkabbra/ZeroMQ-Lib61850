@@ -1,0 +1,127 @@
+version: "3.3"
+services:
+
+  ied_server:
+    image: goose-pub
+    container_name: pub
+    command: "/srv/pub-gse "
+    volumes:
+        - ./testpub1:/srv/logs
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "3"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.61
+    privileged: true
+
+
+  ied_server2:
+    image: goose-pub
+    container_name: pub2
+    command: "/srv/pub-gse "
+    volumes:
+        - ./testpub2:/srv/logs
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "3"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.70
+    privileged: true
+
+
+  ied_server3:
+    image: goose-pub
+    container_name: pub3
+    command: "/srv/pub-gse "
+    volumes:
+        - ./testpub3:/srv/logs
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "3"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.71
+    privileged: true
+
+
+
+  ied_server4:
+    image: goose-pub
+    container_name: pub4
+    command: "/srv/pub-gse "
+    volumes:
+        - ./testpub4:/srv/logs
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "3"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.72
+    privileged: true
+
+
+
+
+  ied_zmq_sub1:
+    image: goose-sub
+    container_name: sub1
+    volumes:
+        - ./testsub1:/srv/logs
+    command: "/srv/goose_sub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+networks:
+  custom_bridge:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24
+
+
+
+            
+# networks:
+#   custom_bridge:
+#     driver: macvlan
+#     driver_opts:
+#       parent: wlp0s20f3   
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24

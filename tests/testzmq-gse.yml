@@ -10,11 +10,12 @@ services:
     tty: true
     cap_add:
       - SYS_NICE
+      - IPC_LOCK
     ulimits:
       rtprio: 98
       rttime: -1
       memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
+    cpuset: "3"  # Set to run on CPU 3
     mem_limit: 6g 
     networks:
       custom_bridge:
@@ -31,22 +32,18 @@ services:
     tty: true
     cap_add:
       - SYS_NICE
+      - IPC_LOCK
     ulimits:
       rtprio: 98
       rttime: -1
       memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
+    cpuset: "4"  # Set to run on CPU 4
     mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.62
     privileged: true
   
- 
-
-
-
-
   zmq_sub:
     image: zmq-sub-tcp:v1
     container_name: sub1
@@ -56,17 +53,19 @@ services:
     tty: true
     cap_add:
       - SYS_NICE
+      - IPC_LOCK
     ulimits:
       rtprio: 98
       rttime: -1
       memlock: 8428281856
-    cpus: 4   # Set the number of CPUs
+    cpuset: "5"  # Set to run on CPU 5
     mem_limit: 6g 
     networks:
       custom_bridge:
         ipv4_address: 192.168.0.63
     privileged: true
-  
+
+ 
 networks:
   custom_bridge:
     driver: bridge
@@ -83,7 +82,7 @@ networks:
 #   custom_bridge:
 #     driver: macvlan
 #     driver_opts:
-#       parent: wlp0s20f3   
+#       parent: enp8s0   
 #     ipam:
 #       driver: default
 #       config:

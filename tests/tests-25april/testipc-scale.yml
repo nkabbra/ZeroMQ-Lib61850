@@ -1,0 +1,218 @@
+version: "3.3"
+services:
+
+  ied_zmq_pub1:
+    image: pub-ipc
+    container_name: pub1
+    volumes:
+      - ./testpub1:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wuserver "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "4"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.63
+    privileged: true
+
+
+
+  ied_zmq_sub1:
+    image: sub-ipc
+    container_name: sub1
+    volumes:
+      - ./testsub1:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.64
+    privileged: true
+
+  ied_zmq_sub2:
+    image: sub-ipc
+    container_name: sub2
+    volumes:
+      - ./testsub2:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.65
+    privileged: true
+
+
+  ied_zmq_sub3:
+    image: sub-ipc
+    container_name: sub3
+    volumes:
+      - ./testsub3:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.66
+    privileged: true
+
+  ied_zmq_sub4:
+    image: sub-ipc
+    container_name: sub4
+    volumes:
+      - ./testsub4:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.67
+    privileged: true
+
+  ied_zmq_sub5:
+    image: sub-ipc
+    container_name: sub5
+    volumes:
+      - ./testsub5:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.68
+    privileged: true
+
+  ied_zmq_sub6:
+    image: sub-ipc
+    container_name: sub6
+    volumes:
+      - ./testsub6:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.69
+    privileged: true
+
+  ied_zmq_sub7:
+    image: sub-ipc
+    container_name: sub7
+    volumes:
+      - ./testsub7:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.70
+    privileged: true
+
+  ied_zmq_sub8:
+    image: sub-ipc
+    container_name: sub8
+    volumes:
+      - ./testsub8:/app/logs
+      - ipc-shared-volume:/tmp
+    command: "/app/wusub "
+    cap_add:
+        - SYS_NICE
+        - IPC_LOCK
+    ulimits:
+        rtprio: 98
+        rttime: -1
+        memlock: 8428281856
+    cpuset: "5"
+    networks:
+      custom_bridge:
+        ipv4_address: 192.168.0.71
+    privileged: true
+
+
+
+    
+volumes:
+  ipc-shared-volume:
+    driver: local
+
+
+
+
+
+
+networks:
+  custom_bridge:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          -
+            subnet: 192.168.0.0/24
+
+            
+# networks:
+#   custom_bridge:
+#     driver: macvlan
+#     driver_opts:
+#       parent: wlp0s20f3   
+#     ipam:
+#       driver: default
+#       config:
+#           -
+#             subnet: 192.168.0.0/24
